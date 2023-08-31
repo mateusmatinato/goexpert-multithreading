@@ -1,5 +1,5 @@
 ### 
-# Exercício 2 - API CEP
+# Exercício 2 - Multithreading
 
 ### Introdução
 Exercício da Pós Graduação em Desenvolvimento Avançado com Golang.
