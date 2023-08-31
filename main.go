@@ -48,8 +48,8 @@ func main() {
 		fastestResp = resp
 	case resp := <-respViaCep:
 		fastestResp = resp
-	case <-time.After(5 * time.Second):
-		log.Println("Timeout after 5 seconds")
+	case <-time.After(1 * time.Second):
+		log.Println("Timeout after 1 second")
 	}
 
 	log.Println("API Name:", fastestResp.APIName)
