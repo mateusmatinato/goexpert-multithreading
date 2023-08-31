@@ -5,6 +5,9 @@
 Exercício da Pós Graduação em Desenvolvimento Avançado com Golang.
 
 ### Para executar
+Clone o repositório e acesse a pasta pelo terminal.
+
+Execute o seguinte comando:
 ```bash
 go run main.go {CEP}
 ```
@@ -18,8 +21,8 @@ Neste desafio você terá que usar o que aprendemos com Multithreading e APIs pa
 
 As duas requisições serão feitas simultaneamente para as seguintes APIs:
 
-https://cdn.apicep.com/file/apicep/" + cep + ".json
-http://viacep.com.br/ws/" + cep + "/json/
+- https://cdn.apicep.com/file/apicep/" + cep + ".json
+- http://viacep.com.br/ws/" + cep + "/json/
 
 Os requisitos para este desafio são:
 - Acatar a API que entregar a resposta mais rápida e descartar a resposta mais lenta.
