@@ -50,6 +50,7 @@ func main() {
 		fastestResp = resp
 	case <-time.After(1 * time.Second):
 		log.Println("Timeout after 1 second")
+		return
 	}
 
 	log.Println("API Name:", fastestResp.APIName)
@@ -61,6 +62,7 @@ func main() {
 func GetViaCep(cepStr string, resp chan CepAPIComparation) {
 	formattedUrl := fmt.Sprintf(ViaCEPURL, cepStr)
 	apiResp, err := CallExternalAPI(formattedUrl)
+	// time.Sleep(1 * time.Second) // uncomment to test APICEP
 	if err == nil {
 		resp <- CepAPIComparation{
 			APIName:  "VIACEP",
