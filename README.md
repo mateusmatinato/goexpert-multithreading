@@ -17,12 +17,16 @@ go run main.go 01001-000
 ```
 
 ### Observações
-Durante os testes notou-se que ViaCEP responde mais rápido na maioria dos casos. Para testar o retorno da APICEP foi necessário adicionar um `time.Sleep()` na chamada para ViaCEP, que está comentado.
+Devido a problemas com a API do apicep.com, foi alterado para consumir a BrasilAPI.
+Pelo próprio navegador, acessando a url fornecida no exercício para a apicep, na maioria das vezes é retornado 403
 
-Além disso, notou-se que a APICEP não funciona com todos os CEPs enviados, porém foi possível testar utilizando o CEP indicado na documentação da própria API:
-```bash
-go run main.go 06233-030
-```
+Ex: https://cdn.apicep.com/file/apicep/06233-030.json
+
+Por isso foi alterado o código para consumir a BrasilAPI, que retorna o resultado corretamente.
+Desse modo é possível fazer a comparação do multithread entre as duas APIs.
+
+Como a BrasilAPI é mais rápida que a ViaCEP, na maioria das vezes o resultado é retornado pela BrasilAPI.
+Para testar a chamada para a ViaCEP, basta comentar a linha 42 do arquivo main.go.
 
 ### Instruções do exercício
 Neste desafio você terá que usar o que aprendemos com Multithreading e APIs para buscar o resultado mais rápido entre duas APIs distintas.
