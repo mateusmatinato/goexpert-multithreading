@@ -13,7 +13,15 @@ go run main.go {CEP}
 ```
 Por exemplo:
 ```bash
-go run main.go 01001000
+go run main.go 01001-000
+```
+
+### Observações
+Durante os testes notou-se que ViaCEP responde mais rápido na maioria dos casos. Para testar o retorno da APICEP foi necessário adicionar um `time.Sleep()` na chamada para ViaCEP, que está comentado.
+
+Além disso, notou-se que a APICEP não funciona com todos os CEPs enviados, porém foi possível testar utilizando o CEP indicado na documentação da própria API:
+```bash
+go run main.go 06233-030
 ```
 
 ### Instruções do exercício
