@@ -11,8 +11,8 @@ import (
 )
 
 const (
-	ViaCEPURL = "https://viacep.com.br/ws/%s/json/"
-	ApiCEPUrl = "https://cdn.apicep.com/file/apicep/%s.json"
+	ViaCEPURL    = "https://viacep.com.br/ws/%s/json/"
+	BrasilAPIUrl = "https://brasilapi.com.br/api/cep/v2/%s"
 )
 
 type CepAPIComparation struct {
@@ -39,7 +39,7 @@ func main() {
 	respApiCep := make(chan CepAPIComparation)
 	respViaCep := make(chan CepAPIComparation)
 
-	go GetApiCep(cepStr, respApiCep)
+	go GetBrasilAPI(cepStr, respApiCep)
 	go GetViaCep(cepStr, respViaCep)
 
 	var fastestResp CepAPIComparation
@@ -62,7 +62,6 @@ func main() {
 func GetViaCep(cepStr string, resp chan CepAPIComparation) {
 	formattedUrl := fmt.Sprintf(ViaCEPURL, cepStr)
 	apiResp, err := CallExternalAPI(formattedUrl)
-	// time.Sleep(1 * time.Second) // uncomment to test APICEP
 	if err == nil {
 		resp <- CepAPIComparation{
 			APIName:  "VIACEP",
@@ -70,19 +69,23 @@ func GetViaCep(cepStr string, resp chan CepAPIComparation) {
 			Duration: apiResp.Duration,
 			Response: apiResp.Response,
 		}
+	} else {
+		log.Printf("Error on VIA CEP - URL: %s - Error: %s\n", formattedUrl, err.Error())
 	}
 }
 
-func GetApiCep(cepStr string, resp chan CepAPIComparation) {
-	formattedUrl := fmt.Sprintf(ApiCEPUrl, cepStr)
+func GetBrasilAPI(cepStr string, resp chan CepAPIComparation) {
+	formattedUrl := fmt.Sprintf(BrasilAPIUrl, cepStr)
 	apiResp, err := CallExternalAPI(formattedUrl)
 	if err == nil {
 		resp <- CepAPIComparation{
-			APIName:  "APICEP",
+			APIName:  "BrasilAPI",
 			APIURL:   formattedUrl,
 			Duration: apiResp.Duration,
 			Response: apiResp.Response,
 		}
+	} else {
+		log.Printf("Error on BrasilAPI - URL: %s - Error: %s\n", formattedUrl, err.Error())
 	}
 }
 
